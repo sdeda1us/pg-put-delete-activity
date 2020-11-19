@@ -7,7 +7,7 @@ $(document).ready(function(){
 function addClickHandlers() {
   $('#submitBtn').on('click', handleSubmit);
   $('#bookList').on('click', '.btn-delete', deleteBook);
-
+  $('#bookList').on('click', '.btn-read', changeStatus);
   // TODO - Add code for edit & delete buttons
 }
 
@@ -73,6 +73,24 @@ function deleteBook() {
   $.ajax({
     method: 'DELETE',
     url: `books/${bookId}`
+  })
+  .then(function(response) {
+    refreshBooks();
+  })
+  .catch(function(error){
+    console.log('error in GET', error);
+  });
+}
+
+//identify the unique id of the row to modify in the database
+function changeStatus(){
+  console.log('in cahngeStatus');
+  let bookId = ($(this).closest('tr').data('book').id);
+  let book = ($(this).closest('tr').data('book'));
+  $.ajax({
+    method: 'PUT',
+    url: `books/${bookId}`,
+    data: {book: book}
   })
   .then(function(response) {
     refreshBooks();
