@@ -60,7 +60,8 @@ function renderBooks(books) {
     $tr.append(`<td>${book.title}</td>`);
     $tr.append(`<td>${book.author}</td>`);
     $tr.append(`<td>${book.status}</td>`);
-    $tr.append(`<button class='btn-delete'>Delete</button>`);
+    $tr.append(`<td><button class='btn-read'>Mark as Read</button>`);
+    $tr.append(`<td><button class='btn-delete'>Delete</button></td>`);
     $('#bookShelf').append($tr);
   }
 }
